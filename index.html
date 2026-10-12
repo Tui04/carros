@@ -344,11 +344,12 @@ a.btn-sec{text-decoration:none;display:inline-flex;align-items:center}
       </div>
       </details>
       <h3 class="subt">Na estrada</h3>
-      <div class="par">
-        <div class="campo"><label for="f-estkm">Km por mês, ida e volta</label><div class="inp"><input id="f-estkm" type="number" min="0" step="10" inputmode="numeric" placeholder="ex.: 220"><span class="un">km</span></div></div>
-        <div class="campo"><label for="f-estgasto">Quanto gasta hoje por mês</label><div class="inp"><span class="un pre">R$</span><input id="f-estgasto" type="number" min="0" step="10" inputmode="numeric" placeholder="opcional"></div></div>
+      <div class="par3">
+        <div class="campo"><label for="f-estkm">Km por mês</label><div class="inp"><input id="f-estkm" type="number" min="0" step="10" inputmode="numeric" placeholder="ex.: 220"><span class="un">km</span></div></div>
+        <div class="campo"><label for="f-estviag">Idas e voltas por mês</label><div class="inp"><input id="f-estviag" type="number" min="0" step="1" inputmode="numeric" placeholder="1"></div></div>
+        <div class="campo"><label for="f-estgasto">Gasto hoje por mês</label><div class="inp"><span class="un pre">R$</span><input id="f-estgasto" type="number" min="0" step="10" inputmode="numeric" placeholder="opcional"></div></div>
       </div>
-      <span class="dica">Viagens para fora da cidade, como visitar a família no interior uma vez por mês. Sem o gasto, a página estima R$ 0,50 por km, preço da passagem de Porto Alegre a Caxias do Sul; viagens longas costumam sair mais barato por km.</span>
+      <span class="dica">Viagens para fora da cidade, como visitar a família no interior uma vez por mês: km somando ida e volta. Sem o gasto, a página estima R$ 0,50 por km, preço da passagem de Porto Alegre a Caxias do Sul; viagens longas costumam sair mais barato por km.</span>
       <p class="minimo" id="hoje-total" hidden></p>
       <p class="erro" role="alert" hidden></p>
       <div class="nav-passo"><button type="submit" class="btn btn-g">Continuar</button><button type="button" class="btn-texto" data-resultado hidden>Ir para o resultado</button></div>
@@ -356,17 +357,26 @@ a.btn-sec{text-decoration:none;display:inline-flex;align-items:center}
 
     <section class="passo" data-passo="1" hidden>
       <h2 tabindex="-1">E com carro?</h2>
-      <p class="sub">O que mudaria na sua rotina se você tivesse carro.</p>
+      <p class="sub">Quanto tempo o carro pouparia. Na cidade, de app, muda pouco; na estrada costuma mudar bastante.</p>
+      <h3 class="subt">Na cidade</h3>
       <div class="par">
-        <div class="campo"><label for="f-min">Tempo que o carro poupa por viagem de ônibus</label><div class="inp"><input id="f-min" type="number" min="0" step="5" inputmode="numeric"><span class="un">min</span></div></div>
-        <div class="campo"><label for="f-hora">Quanto vale uma hora sua</label><div class="inp"><span class="un pre">R$</span><input id="f-hora" type="number" min="0" step="5" inputmode="numeric"></div></div>
+        <div class="campo"><label for="f-min">Tempo poupado por viagem de ônibus</label><div class="inp"><input id="f-min" type="number" min="0" step="5" inputmode="numeric"><span class="un">min</span></div></div>
+        <div class="campo"><label for="f-minapp">Tempo poupado por corrida de app</label><div class="inp"><input id="f-minapp" type="number" min="0" step="1" inputmode="numeric"><span class="un">min</span></div></div>
       </div>
-      <span class="dica">De app o tempo é parecido com o do carro, então só as viagens de ônibus, e as a pé que você marcou, contam como tempo poupado. O valor da hora decide se esse tempo paga a diferença de custo.</span>
+      <span class="dica">De ônibus, conte a espera, as paradas e a caminhada até o ponto. De app, o carro só poupa a espera pelo motorista: poucos minutos, ou nada.</span>
+      <h3 class="subt">Na estrada</h3>
       <div class="campo">
-        <label for="f-extra">Passeios que você só faria de carro</label>
-        <div class="inp curto"><input id="f-extra" type="number" min="0" step="10" inputmode="numeric" placeholder="0"><span class="un">km por mês</span></div>
-        <span class="dica">Quem compra carro costuma rodar mais do que rodava antes. Deixe em branco se não pretende.</span>
+        <label for="f-hest">Tempo poupado em cada ida e volta</label>
+        <div class="inp curto"><input id="f-hest" type="number" min="0" step="0.5" inputmode="decimal"><span class="un">horas</span></div>
+        <span class="dica">Some o caminho até a rodoviária, a espera e a diferença de tempo entre o ônibus e o carro, na ida e na volta.</span>
       </div>
+      <h3 class="subt">Quanto vale o seu tempo</h3>
+      <div class="par">
+        <div class="campo"><label for="f-hora">Quanto vale uma hora sua</label><div class="inp"><span class="un pre">R$</span><input id="f-hora" type="number" min="0" step="5" inputmode="numeric"></div></div>
+        <div class="campo"><label for="f-extra">Passeios que você só faria de carro</label><div class="inp"><input id="f-extra" type="number" min="0" step="10" inputmode="numeric" placeholder="0"><span class="un">km por mês</span></div></div>
+      </div>
+      <span class="dica">O valor da hora decide se o tempo poupado paga a diferença de custo. Quem compra carro costuma rodar mais do que rodava antes; deixe os passeios em branco se não pretende.</span>
+      <p class="minimo" id="tempo-total" hidden></p>
       <p class="erro" role="alert" hidden></p>
       <div class="nav-passo"><button type="button" class="btn-sec btn-g" data-voltar>Voltar</button><button type="submit" class="btn btn-g">Continuar</button><button type="button" class="btn-texto" data-resultado hidden>Ir para o resultado</button></div>
     </section>
@@ -571,7 +581,7 @@ a.btn-sec{text-decoration:none;display:inline-flex;align-items:center}
             <div class="campo"><label for="a-terceiros">Seguro só contra terceiros, por ano</label><div class="inp"><span class="un pre">R$</span><input id="a-terceiros" type="number" min="0" step="50" inputmode="numeric"></div></div>
           </div>
           <div class="par">
-            <div class="campo"><label for="a-buskm">Km por viagem de ônibus, para estimar</label><div class="inp"><input id="a-buskm" type="number" min="1" step="1" inputmode="numeric"><span class="un">km</span></div></div>
+            <div class="campo"><label for="a-buskm">Km por viagem na cidade, para estimar</label><div class="inp"><input id="a-buskm" type="number" min="1" step="1" inputmode="numeric"><span class="un">km</span></div></div>
             <div class="campo"><label for="a-limite">Limite pela renda, sem valor de gasto</label><div class="inp"><input id="a-limite" type="number" min="0" max="100" step="1" inputmode="numeric"><span class="un">% da renda</span></div></div>
           </div>
           <div class="par">
@@ -621,7 +631,7 @@ a.btn-sec{text-decoration:none;display:inline-flex;align-items:center}
           <p><strong>Financiamento.</strong> O seu dinheiro entra primeiro e só o que falta é financiado, até o valor que você informou. Os juros entram como custo, e a parcela inteira entra no que sai da sua conta.</p>
           <p><strong>Limite de gasto.</strong> O limite vale para tudo o que sai da sua conta por mês: combustível ou energia, manutenção com pneus e imprevistos, seguro, IPVA, licenciamento, estacionamento e parcela. Sem um valor, a página usa 20% da renda, se você informar a renda. Se o total passa do limite, a página troca para um ano mais velho ou mais novo da mesma versão que caiba. Um carro mais novo pode gastar menos de manutenção, por causa da garantia, e um mais velho costuma pagar menos seguro e IPVA. Se nenhum ano cabe, fica o que menos gasta por mês, com aviso, no fim da lista, e a página mostra quanto ele custaria com menos seguro. Quando sobra bastante folga até o limite, consumo e manutenção passam a pesar menos na ordem da lista, e segurança, motor, conforto, acabamento e equipamentos passam a pesar mais.</p>
           <p><strong>Sem carro.</strong> Na cidade, sem detalhe, a página estima: a parte dos km que você diz que iria de app sai a R$ 2 o km, e o resto vai de ônibus, a R$ 5 por viagem de 8 km. Com detalhe, vale o que você gasta hoje com app e ônibus. Na estrada vale o que você gasta por mês; sem esse valor, e para gastos em branco no detalhe, a página estima: app a R$ 2 por km, R$ 5 por viagem de ônibus e estrada a R$ 0,50 por km, preço da passagem de Porto Alegre a Caxias do Sul, de R$ 63 a R$ 68 por cerca de 125 km em outubro de 2026.</p>
-          <p><strong>Veredito.</strong> Primeiro a página vê se dá para ter carro: se nenhum carro da base cabe no orçamento, ou se até o mais barato de manter passa do que você pode gastar por mês, a resposta é ficar sem carro, com o que faria caber. Só depois ela compara com ficar sem carro. Se o carro sai mais barato, compensa no bolso. Se sai mais caro, a diferença é dividida pelas horas que você ganha, contando só as viagens de ônibus, uma a cada 8 km sem detalhe, e as a pé que passariam para o carro. Compensa pelo tempo quando esse preço fica abaixo do valor que você deu para a sua hora.</p>
+          <p><strong>Veredito.</strong> Primeiro a página vê se dá para ter carro: se nenhum carro da base cabe no orçamento, ou se até o mais barato de manter passa do que você pode gastar por mês, a resposta é ficar sem carro, com o que faria caber. Só depois ela compara com ficar sem carro. Se o carro sai mais barato, compensa no bolso. Se sai mais caro, a diferença é dividida pelas horas que você ganha: os minutos poupados em cada viagem de ônibus, uma a cada 8 km sem detalhe, e nas a pé que passariam para o carro, os minutos poupados por corrida de app e as horas poupadas em cada ida e volta na estrada. Compensa pelo tempo quando esse preço fica abaixo do valor que você deu para a sua hora.</p>
           <p><strong>Tamanho, motor, portas e direção.</strong> Cada versão tem um porte: pequeno para os carros de entrada, compacto para os hatches comuns, médio para sedãs compactos, SUVs compactos e picapes pequenas, e grande para sedãs médios e SUVs maiores. O tamanho também entra na aderência com peso pequeno, e pesa mais se você marcar "Carro espaçoso". A cilindrada vem do nome da versão na Fipe. A direção conta como assistida, hidráulica ou elétrica, salvo nos carros de entrada antigos, em que era opcional, e no Gol quadrado, que não tem.</p>
           <p><strong>Ranking.</strong> Para cada versão a página procura a opção mais nova que cabe no orçamento e na renda, começando pelo 0 km. A aderência soma ano, confiabilidade, manutenção, gasto com combustível ou energia, segurança, motor, revenda, porta-malas e tamanho. Dirigir, conforto, acabamento e equipamentos entram com peso menor. O que você marca no último passo pesa o triplo, e nunca menos que 3, para que porta-malas ou conforto marcados não fiquem quase sem efeito.</p>
           <p><strong>Gosto e não quero.</strong> Marca de que você gosta soma 8 pontos e modelo de que você gosta soma 12. Marca ou modelo que você não quer sai da lista, e a página mostra em que posição ele estaria, para você ver quanto a opinião custa.</p>
@@ -783,7 +793,7 @@ const PORTES = {1:"pequeno", 2:"compacto", 3:"médio", 4:"grande"};
 const grupoEnergia = c => c.energia === "gasolina" ? "flex" : c.energia;
 
 const PADRAO = {kmMes:450, appFrac:2, appGasto:0, appCorr:0, appDist:0, busGasto:0, busViag:0, busDist:0, peViag:0, peDist:0, peCarro:"nao",
-  estradaGasto:60, estradaKmMes:220, extraKm:0, tarifa:5, appKm:2, busKmViagem:8, minutos:20, hora:40,
+  estradaGasto:60, estradaKmMes:220, estradaViag:1, extraKm:0, tarifa:5, appKm:2, busKmViagem:8, minutos:20, minApp:0, horasEstrada:2, hora:40,
   orcamento:50000, financiado:0, renda:6000, tetoTotal:0, anos:5, uf:"RS", faixa:"meio", estac:0,
   novo:"tanto", cambio:"tanto", corpos:[], energias:[], sete:false, porteMin:1, motoresCc:[], so4p:false, soAssistida:false, casa:"nao", semAirbag:"nao", prio:["novo","conf","manut"],
   opin:[], gostaMarcas:[], naoMarcas:[], gostaModelos:[], naoModelos:[], texto:"",
@@ -815,9 +825,9 @@ function calcUso(p){
   if (!detalhado(p)){
     // km por mês na cidade; sem carro, uma parte iria de app e o resto de ônibus. A estrada vem à parte.
     const km = p.kmMes, frac = clamp01(p.appFrac/10), comCarro = km + p.extraKm, kmEstrada = p.estradaKmMes*12;
-    const busKmMes = km*(1 - frac);
+    const busKmMes = km*(1 - frac), porViagem = p.busKmViagem > 0 ? 1/p.busKmViagem : 0;
     return {modo:"simples", kmCidade:comCarro*12, kmEstrada, kmTotal:comCarro*12 + kmEstrada, kmDia:comCarro/22,
-            viagens:(p.busKmViagem > 0 ? busKmMes/p.busKmViagem : 0)*12, appKmMes:km*frac, busKmMes};
+            viagens:busKmMes*porViagem*12, viagensApp:km*frac*porViagem*12, viagensEstrada:viagensEstrada(p), appKmMes:km*frac, busKmMes};
   }
   // km por mês na cidade: app (pelos km; sem eles, pelo gasto), ônibus, a pé se passar para o carro, e os passeios novos
   const appKmMes = p.appCorr > 0 && p.appDist > 0 ? p.appCorr*p.appDist : (p.appGasto > 0 && p.appKm > 0 ? p.appGasto/p.appKm : 0);
@@ -827,7 +837,15 @@ function calcUso(p){
   // o carro poupa tempo nas viagens de ônibus e nas que hoje são a pé; de app, o tempo é parecido
   const viagens = (p.busViag + (pe ? p.peViag : 0))*12;
   const kmDia = kmCidadeMes/22;            // por dia útil: decide quanto o plug-in roda no elétrico
-  return {modo:"detalhe", kmCidade, kmEstrada, kmTotal:kmCidade+kmEstrada, viagens, kmDia, appKmMes};
+  const viagensApp = (p.appCorr > 0 ? p.appCorr : (p.busKmViagem > 0 ? appKmMes/p.busKmViagem : 0))*12;
+  return {modo:"detalhe", kmCidade, kmEstrada, kmTotal:kmCidade+kmEstrada, viagens, viagensApp, viagensEstrada:viagensEstrada(p), kmDia, appKmMes};
+}
+// idas e voltas para a estrada por ano; com km e sem o número de viagens, conta uma por mês
+function viagensEstrada(p){ return p.estradaKmMes > 0 ? (p.estradaViag > 0 ? p.estradaViag : 1)*12 : 0; }
+// horas por ano que o carro poupa: minutos por viagem de ônibus e por corrida de app, horas por ida e volta na estrada
+function horasPoupadas(p, uso){
+  const cidade = ((uso.viagens || 0)*p.minutos + (uso.viagensApp || 0)*p.minApp)/60, estrada = (uso.viagensEstrada || 0)*p.horasEstrada;
+  return {cidade, estrada, total:cidade + estrada};
 }
 
 function custoSemCarro(p, uso){
@@ -948,7 +966,7 @@ function custoCarro(p, uso, car, valor, opt){
 
 function veredito(p, uso, carro, sem){
   const diff = carro.total - sem.total;
-  const horas = uso.viagens*p.minutos/60;
+  const horas = horasPoupadas(p, uso).total;
   const porHora = horas > 0 ? diff/horas : Infinity;
   const estado = diff <= 0 ? "bolso" : (porHora <= p.hora ? "tempo" : "nao");
   const margem = sem.total - carro.variavel;
@@ -1138,11 +1156,11 @@ const num = (n, d=0) => n.toLocaleString("pt-BR", {minimumFractionDigits:d, maxi
 const CHAVE = "carro-na-ponta-do-lapis:v6";
 const pct = x => num(100*x, x < 0.1 ? 1 : 0) + "%";
 
-const CAMPOS = {kmMes:"f-kmmes", appFrac:"f-appfrac", busKmViagem:"a-buskm", appGasto:"f-appgasto", appCorr:"f-appcorr", appDist:"f-appdist", busGasto:"f-busgasto", busViag:"f-busviag", busDist:"f-busdist",
+const CAMPOS = {minApp:"f-minapp", horasEstrada:"f-hest", estradaViag:"f-estviag", kmMes:"f-kmmes", appFrac:"f-appfrac", busKmViagem:"a-buskm", appGasto:"f-appgasto", appCorr:"f-appcorr", appDist:"f-appdist", busGasto:"f-busgasto", busViag:"f-busviag", busDist:"f-busdist",
   peViag:"f-peviag", peDist:"f-pedist", estradaGasto:"f-estgasto", estradaKmMes:"f-estkm", extraKm:"f-extra", tarifa:"f-tarifa", appKm:"f-appkm", minutos:"f-min", hora:"f-hora", orcamento:"f-orc", financiado:"f-fin", renda:"f-renda", tetoTotal:"f-ttotal", anos:"f-anos", estac:"f-estac",
   gasolina:"a-gas", seguroAj:"a-seguro", reserva:"a-reserva", imprevistos:"a-imprev", rend:"a-rend", dvAj:"a-dvaj", kwhCasa:"a-kwhcasa", kwhRua:"a-kwhrua", limite:"a-limite",
   juros:"a-juros", prazo:"a-prazo", licenciamento:"a-lic", estradaKm:"a-estradakm", correia:"a-correia", terceiros:"a-terceiros"};
-const PESSOAIS = ["kmMes","appGasto","appCorr","appDist","busGasto","busViag","busDist","peViag","peDist","estradaGasto","estradaKmMes","extraKm","orcamento","renda","tetoTotal"];
+const PESSOAIS = ["kmMes","estradaViag","appGasto","appCorr","appDist","busGasto","busViag","busDist","peViag","peDist","estradaGasto","estradaKmMes","extraKm","orcamento","renda","tetoTotal"];
 // "do limite de 20% da renda e do teto de manutenção (R$ 300)"
 function textoEstouros(lst, p){
   const t = {renda:`do limite de ${num(p.limite)}% da renda (${brl(p.renda*p.limite/100)})`, total:`dos ${brl(p.tetoTotal)} que você pode gastar por mês`};
@@ -1367,7 +1385,7 @@ function desenharVeredito(p, uso, alvo, rk){
     leg2 = uso.modo === "simples" ? "Fazer esses km de app e ônibus sairia mais caro que o custo real do carro." : "O que você gasta hoje com app, ônibus e viagens passa do custo real do carro.";
   } else {
     leg = p.contaRend === "nao" ? "a mais para ter carro, contando a perda de valor, sem o rendimento do dinheiro." : "a mais para ter carro, contando a perda de valor e o rendimento que o dinheiro do carro teria.";
-    if (v.horas <= 0) leg2 = "Pelo que você informou, o carro não poupa tempo: de app o tempo já é parecido com o do carro. A diferença é só custo.";
+    if (v.horas <= 0) leg2 = "Pelo que você informou, o carro não poupa tempo, então a diferença é só custo.";
     else if (v.estado === "tempo") leg2 = `Em troca você ganha cerca de ${num(horasMes)} horas por mês. Cada hora sai por ${brl(v.porHora)}, abaixo dos ${brl(p.hora)} que você disse que a sua hora vale.`;
     else leg2 = `Você ganharia cerca de ${num(horasMes)} horas por mês, mas cada hora sairia por ${brl(v.porHora)}, acima dos ${brl(p.hora)} que você disse que a sua hora vale.`;
   }
@@ -1528,6 +1546,11 @@ function atualizar(){
   } else mm.hidden = true;
   const ht = $("hoje-total");
   $("f-appfrac-val").textContent = p.appFrac;
+  { const hp = horasPoupadas(p, uso), tt = $("tempo-total");
+    tt.hidden = uso.kmTotal <= 0;
+    tt.innerHTML = hp.total > 0
+      ? `Com isso, o carro pouparia cerca de <b>${num(hp.total/12, 1)} horas por mês</b>: ${num(hp.cidade/12, 1)} na cidade e ${num(hp.estrada/12, 1)} na estrada. Na sua hora de ${brl(p.hora)}, isso vale ${brl(hp.total/12*p.hora)} por mês.`
+      : "Com isso, o carro não pouparia tempo: a diferença de custo fica sem nada que a pague."; }
   ht.hidden = semC.total <= 0 && uso.kmTotal <= 0;
   const partesHoje = [semC.app > 0 ? `${brl(semC.app/12)} de app` : "", semC.publico > 0 ? `${brl(semC.publico/12)} de ônibus` : ""].filter(Boolean).join(" e ");
   const estTxt = semC.estrada > 0 ? `${partesHoje ? " e " : ""}${brl(semC.estrada/12)} de estrada${semC.estimado.estrada ? ", estimado" : ""}` : "";
@@ -1589,7 +1612,7 @@ $("app").addEventListener("change", mudou);
 
 // ---------------------------------------------------------------- passo a passo
 // o que a pessoa precisa preencher começa vazio; o resto já vem com uma sugestão
-const INICIO = Object.assign({}, PADRAO, {kmMes:"", appGasto:"", appCorr:"", appDist:"", busGasto:"", busViag:"", busDist:"", peViag:"", peDist:"", peCarro:"nao", estradaGasto:"", estradaKmMes:"", extraKm:"", orcamento:"", renda:"", tetoTotal:"", uf:"", faixa:"", prio:[]});
+const INICIO = Object.assign({}, PADRAO, {kmMes:"", estradaViag:"", appGasto:"", appCorr:"", appDist:"", busGasto:"", busViag:"", busDist:"", peViag:"", peDist:"", peCarro:"nao", estradaGasto:"", estradaKmMes:"", extraKm:"", orcamento:"", renda:"", tetoTotal:"", uf:"", faixa:"", prio:[]});
 const PASSOS = ["Hoje","Com carro","Gastos","Carro","O que importa"];
 const FIM = PASSOS.length;                     // posição do resultado
 const secoes = [...document.querySelectorAll(".passo")];
@@ -1684,7 +1707,7 @@ function resumir(p, uso){
   })();
   const itens = [
     ["Hoje", (uso.modo === "simples" ? `${num(p.kmMes)} km por mês na cidade, ${p.appFrac} de 10 de app` : `cidade detalhada, ${brl(custoSemCarro(p, uso).total/12)} por mês`) + (p.estradaKmMes > 0 ? `; ${num(p.estradaKmMes)} km de estrada` : "")],
-    ["Com carro", `${num(Math.round(uso.kmTotal/12))} km por mês, ${num(p.minutos)} min poupados por viagem de ônibus`],
+    ["Com carro", `${num(Math.round(uso.kmTotal/12))} km por mês, ${num(horasPoupadas(p, uso).total/12, 1)} h poupadas por mês`],
     ["Gastos", brl(p.orcamento) + (p.financiado > 0 ? `, até ${brl(Math.min(p.financiado, p.orcamento))} financiados` : "") + mensal],
     ["Carro", `${nv}, ${cb}, ${cp}${me}${semMarca}`],
     ["O que importa", nImp ? `${nImp} ${nImp === 1 ? "item marcado" : "itens marcados"}` : "Nada marcado"]
