@@ -1442,17 +1442,17 @@ const podeFoto = !window.claude && typeof fetch === "function";
 function buscaFoto(car){
   if (!podeFoto || !car.wiki || !car.wiki.length) return Promise.resolve(null);
   if (!FOTOS.has(car.id)) FOTOS.set(car.id, (async () => {
+    // API clássica da Wikipedia (aceita chamadas de outros sites com origin=*): foto principal do artigo, já em 640 px
     for (const t of car.wiki){
       try {
-        const r = await fetch("https://en.wikipedia.org/api/rest_v1/page/summary/" + encodeURIComponent(t.replace(/ /g, "_")));
+        const u = "https://en.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&origin=*&redirects=1&prop=pageimages&piprop=thumbnail%7Cname&pithumbsize=640&titles=" + encodeURIComponent(t);
+        const r = await fetch(u);
         if (!r.ok) continue;
-        const j = await r.json();
-        if (j.type === "disambiguation" || !j.thumbnail || !j.thumbnail.source) continue;
-        const orig = j.originalimage || {}, nome = orig.source ? decodeURIComponent(orig.source.split("/").pop()) : "";
-        const src = orig.width >= 640 ? j.thumbnail.source.replace(/\/\d+px-/, "/640px-") : (orig.source || j.thumbnail.source);
-        const credito = orig.source && orig.source.includes("/commons/") ? "https://commons.wikimedia.org/wiki/File:" + encodeURIComponent(nome)
-          : (j.content_urls && j.content_urls.desktop && j.content_urls.desktop.page) || "https://en.wikipedia.org/wiki/" + encodeURIComponent(t);
-        return {src, credito};
+        const pg = ((await r.json()).query || {}).pages || [];
+        const pag = pg[0];
+        if (!pag || pag.missing || !pag.thumbnail || !pag.thumbnail.source) continue;
+        const credito = pag.pageimage ? "https://commons.wikimedia.org/wiki/File:" + encodeURIComponent(pag.pageimage) : "https://en.wikipedia.org/wiki/" + encodeURIComponent(pag.title || t);
+        return {src:pag.thumbnail.source, credito};
       } catch (e) {}
     }
     return null;
